@@ -69,4 +69,9 @@ dependencies {
     kapt libs.hilt.android.compiler
     kapt libs.androidx.hilt.compiler
     kapt libs.hilt.compiler
+
+    // Ktor client
+    implementation(libs.ktor.client.android)
+    implementation(libs.ktor.client.serialization)
+    implementation(libs.ktor.client.logging.jvm)
 }

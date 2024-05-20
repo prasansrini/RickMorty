@@ -12,6 +12,9 @@ hiltAndroid = "2.51.1"
 hiltNavigationCompose = "1.2.0"
 kotlinxCoroutinesCore = "1.8.0"
 kotlinxCoroutinesAndroid = "1.8.0"
+ktorClientAndroid = "1.5.0"
+ktorClientLoggingJvm = "1.5.0"
+ktorClientSerialization = "1.5.0"
 materialIconsExtended = "1.6.7"
 navigationCompose = "2.7.7"
 appcompat = "1.6.1"
@@ -44,6 +47,9 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktorClientAndroid" }
+ktor-client-logging-jvm = { module = "io.ktor:ktor-client-logging-jvm", version.ref = "ktorClientLoggingJvm" }
+ktor-client-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktorClientSerialization" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
