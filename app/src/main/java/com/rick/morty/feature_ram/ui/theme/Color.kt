@@ -1,4 +1,4 @@
-package com.rick.morty.ui.theme
+package com.rick.morty.feature_ram.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
