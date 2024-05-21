@@ -20,7 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.rick.morty.feature_ram.components.character.CharacterDetailsNamePlateComponent
 import com.rick.morty.feature_ram.components.common.DataPoint
 import com.rick.morty.feature_ram.components.common.DataPointComponent
@@ -120,14 +120,15 @@ fun CharacterDetailsScreen(
 		}
 
 		item {
-			AsyncImage(
+			SubcomposeAsyncImage(
 				model = character!!.imageUrl,
 				contentDescription = "Character image",
 				modifier = Modifier
 					.fillMaxWidth()
 					.aspectRatio(1f)
 					.padding(12.dp)
-					.clip(RoundedCornerShape(12.dp))
+					.clip(RoundedCornerShape(12.dp)),
+				loading = { LoadingState() }
 			)
 		}
 
