@@ -7,6 +7,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.rick.morty.core.util.Constants.Routes.CHARACTER_DETAIL_ROUTE
+import com.rick.morty.core.util.Constants.Routes.CHARACTER_EPISODE_ROUTE
 import com.rick.morty.feature_ram.ui.theme.RickAndMortyAppTheme
 import com.rick.morty.screens.CharacterDetailsScreen
 import com.rick.network.repository.RickMortyApiClient
@@ -22,7 +27,19 @@ class MainActivity : ComponentActivity() {
 		super.onCreate(savedInstanceState)
 
 		setContent {
-			HomeComponent()
+
+			val navController = rememberNavController()
+
+			NavHost(
+				navController = navController,
+				startDestination = "character_details"
+			) {
+				composable(CHARACTER_DETAIL_ROUTE) {
+					HomeComponent()
+				}
+
+				composable(CHARACTER_EPISODE_ROUTE) { }
+			}
 		}
 	}
 
