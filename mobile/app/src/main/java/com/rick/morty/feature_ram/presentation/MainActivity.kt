@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.rick.morty.feature_ram.ui.theme.RickAndMortyAppTheme
 import com.rick.network.components.TextComponent
-import com.rick.network.model.Character
+import com.rick.network.models.domain.Character
 import com.rick.network.repository.RickMortyApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

@@ -1,7 +1,7 @@
 package com.rick.network
 
 import android.util.Log
-import com.rick.network.model.Character
+import com.rick.network.models.domain.Character
 import com.rick.network.repository.RickMortyApiClient
 import com.rick.network.util.Constants.BASE_URL
 import io.ktor.client.HttpClient
