@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,7 +21,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
 	@Inject
 	lateinit var rickMortyApiClient: RickMortyApiClient
 
@@ -28,22 +28,26 @@ class MainActivity : ComponentActivity() {
 		super.onCreate(savedInstanceState)
 
 		setContent {
-			var character by remember {
-				mutableStateOf<Character?>(null)
-			}
+			PreviewedComponent()
+		}
+	}
 
-			LaunchedEffect(key1 = Unit,
-				block = {
-					character = rickMortyApiClient.getCharacter(65)
-				})
+	@Composable
+	fun PreviewedComponent(modifier: Modifier = Modifier) {
+		var character by remember {
+			mutableStateOf<Character?>(null)
+		}
 
-			RickAndMortyAppTheme {
-				Surface(modifier = Modifier.fillMaxSize()) {
-					CharacterDetailsScreen(
-						rickMortyApiClient = rickMortyApiClient,
-						characterId = 25
-					)
-				}
+		LaunchedEffect(key1 = Unit) {
+			character = rickMortyApiClient.getCharacter(65)
+		}
+
+		RickAndMortyAppTheme {
+			Surface(modifier = Modifier.fillMaxSize()) {
+				CharacterDetailsScreen(
+					rickMortyApiClient = rickMortyApiClient,
+					characterId = 366
+				)
 			}
 		}
 	}
