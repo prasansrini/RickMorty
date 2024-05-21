@@ -1,6 +1,5 @@
 package com.rick.network.repository
 
-import android.util.Log
 import com.rick.network.models.domain.Character
 import com.rick.network.models.remote.RemoteCharacter
 import com.rick.network.util.Constants.BASE_URL
@@ -31,17 +30,35 @@ class RickMortyApiClientImpl : RickMortyApiClient {
 		}
 	}
 
-	override suspend fun getCharacter(id: Int): Character {
-		val character: Character = client
-			.get("character/$id")
-			.body<RemoteCharacter>()
-			.toDomainCharacter()
+	override suspend fun getCharacter(id: Int): ApiOperation<Character> {
+		return safeApiCall {
+			client
+				.get("character/$id")
+				.body<RemoteCharacter>()
+				.toDomainCharacter()
+		}
+	}
 
-		Log.e(
-			"CHARACTER_DEBUG",
-			character.toString()
-		)
+	private inline fun <T> safeApiCall(apiCall: () -> T): ApiOperation<T> {
+		return try {
+			ApiOperation.Success(data = apiCall())
+		} catch (e: Exception) {
+			ApiOperation.Failure(e)
+		}
+	}
+}
 
-		return character
+sealed interface ApiOperation<T> {
+	data class Success<T>(val data: T) : ApiOperation<T>
+	data class Failure<T>(val exception: Exception) : ApiOperation<T>
+
+	fun onSuccess(block: (T) -> Unit): ApiOperation<T> {
+		if (this is Success) block(data)
+		return this
+	}
+
+	fun onFailure(block: (Exception) -> Unit): ApiOperation<T> {
+		if (this is Failure) block(exception)
+		return this
 	}
 }

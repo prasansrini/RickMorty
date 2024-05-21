@@ -92,7 +92,15 @@ fun CharacterDetailsScreen(
 	LaunchedEffect(key1 = Unit,
 		block = {
 			delay(500)
-			character = rickMortyApiClient.getCharacter(characterId)
+
+			rickMortyApiClient
+				.getCharacter(characterId)
+				.onSuccess { result ->
+					character = result
+				}
+				.onFailure { exception ->
+
+				}
 		})
 
 	LazyColumn(
