@@ -7,19 +7,24 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.rick.morty.core.util.Constants.Routes.CHARACTER_DETAIL_ROUTE
 import com.rick.morty.core.util.Constants.Routes.CHARACTER_EPISODE_ROUTE
 import com.rick.morty.feature_ram.ui.theme.RickAndMortyAppTheme
 import com.rick.morty.screens.CharacterDetailsScreen
+import com.rick.morty.screens.CharacterEpisodeScreen
 import com.rick.network.repository.RickMortyApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+	private val characterId = (0..600).random()
+
 	@Inject
 	lateinit var rickMortyApiClient: RickMortyApiClient
 
@@ -32,24 +37,39 @@ class MainActivity : ComponentActivity() {
 
 			NavHost(
 				navController = navController,
-				startDestination = "character_details"
+				startDestination = CHARACTER_DETAIL_ROUTE
 			) {
 				composable(CHARACTER_DETAIL_ROUTE) {
-					HomeComponent()
+					HomeComponent {
+						navController.navigate("$CHARACTER_EPISODE_ROUTE/$it")
+					}
 				}
 
-				composable(CHARACTER_EPISODE_ROUTE) { }
+				composable(
+					route = "$CHARACTER_EPISODE_ROUTE/{characterId}",
+					arguments = listOf(navArgument("characterId") { type = NavType.IntType })
+				) { backStackEntry ->
+					RickAndMortyAppTheme {
+						Surface(modifier = Modifier.fillMaxSize()) {
+							CharacterEpisodeScreen(
+								characterId = backStackEntry.arguments?.getInt("characterId")
+										?: -1
+							)
+						}
+					}
+				}
 			}
 		}
 	}
 
 	@Composable
-	fun HomeComponent(modifier: Modifier = Modifier) {
+	fun HomeComponent(onEpisodeClicked: (Int) -> Unit) {
 		RickAndMortyAppTheme {
 			Surface(modifier = Modifier.fillMaxSize()) {
 				CharacterDetailsScreen(
 					rickMortyApiClient = rickMortyApiClient,
-					characterId = (0..600).random()
+					characterId = characterId,
+					onEpisodeClicked = onEpisodeClicked
 				)
 			}
 		}
