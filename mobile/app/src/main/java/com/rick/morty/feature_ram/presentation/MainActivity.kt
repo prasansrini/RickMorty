@@ -4,18 +4,20 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import com.rick.morty.feature_ram.ui.theme.RickAndMortyAppTheme
-import com.rick.network.components.TextComponent
+import com.rick.morty.screens.CharacterDetailsScreen
+import com.rick.morty.screens.CharacterStatusComponent
 import com.rick.network.models.domain.Character
+import com.rick.network.models.domain.CharacterStatus
 import com.rick.network.repository.RickMortyApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -41,13 +43,18 @@ class MainActivity : ComponentActivity() {
 
 			RickAndMortyAppTheme {
 				Surface(modifier = Modifier.fillMaxSize()) {
-					TextComponent(
-						name = character?.name
-								?: "No character found!",
-						modifier = Modifier.padding(8.dp)
+					CharacterDetailsScreen(
+						rickMortyApiClient = rickMortyApiClient,
+						characterId = 1
 					)
 				}
 			}
 		}
 	}
+}
+
+@Preview()
+@Composable
+fun PreviewedComponents() {
+	CharacterStatusComponent(characterStatus = CharacterStatus.Alive)
 }

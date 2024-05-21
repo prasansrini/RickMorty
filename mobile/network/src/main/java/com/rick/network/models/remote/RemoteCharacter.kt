@@ -30,7 +30,7 @@ data class RemoteCharacter(
 			val name: String, val url: String
 	)
 
-	fun RemoteCharacter.toDomainCharacter(): Character {
+	fun toDomainCharacter(): Character {
 		val gender = when (gender.lowercase()) {
 			"female" -> CharacterGender.Female
 			"male" -> CharacterGender.Male

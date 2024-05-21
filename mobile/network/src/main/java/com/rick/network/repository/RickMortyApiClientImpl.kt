@@ -1,7 +1,8 @@
-package com.rick.network
+package com.rick.network.repository
 
 import android.util.Log
 import com.rick.network.models.domain.Character
+import com.rick.network.models.remote.RemoteCharacter
 import com.rick.network.repository.RickMortyApiClient
 import com.rick.network.util.Constants.BASE_URL
 import io.ktor.client.HttpClient
@@ -34,7 +35,8 @@ class RickMortyApiClientImpl : RickMortyApiClient {
 	override suspend fun getCharacter(id: Int): Character {
 		val character: Character = client
 			.get("character/$id")
-			.body()
+			.body<RemoteCharacter>()
+			.toDomainCharacter()
 
 		Log.e(
 			"CHARACTER_DEBUG",
