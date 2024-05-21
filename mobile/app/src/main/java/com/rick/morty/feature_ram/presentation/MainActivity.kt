@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
 			Surface(modifier = Modifier.fillMaxSize()) {
 				CharacterDetailsScreen(
 					rickMortyApiClient = rickMortyApiClient,
-					characterId = 173
+					characterId = (0..600).random()
 				)
 			}
 		}
