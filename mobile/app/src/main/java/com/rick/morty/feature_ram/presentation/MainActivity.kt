@@ -28,12 +28,12 @@ class MainActivity : ComponentActivity() {
 		super.onCreate(savedInstanceState)
 
 		setContent {
-			PreviewedComponent()
+			HomeComponent()
 		}
 	}
 
 	@Composable
-	fun PreviewedComponent(modifier: Modifier = Modifier) {
+	fun HomeComponent(modifier: Modifier = Modifier) {
 		var character by remember {
 			mutableStateOf<Character?>(null)
 		}
