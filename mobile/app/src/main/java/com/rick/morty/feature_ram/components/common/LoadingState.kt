@@ -11,11 +11,11 @@ import com.rick.morty.feature_ram.ui.theme.RickAction
 @Composable
 fun LoadingState(
 		modifier: Modifier = Modifier
-			.fillMaxSize()
-			.padding(all = 128.dp)
 ) {
 	CircularProgressIndicator(
-		modifier = modifier,
+		modifier = modifier
+			.fillMaxSize()
+			.padding(all = 128.dp),
 		color = RickAction
 	)
 }

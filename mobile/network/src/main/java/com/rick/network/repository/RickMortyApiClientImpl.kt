@@ -3,7 +3,6 @@ package com.rick.network.repository
 import android.util.Log
 import com.rick.network.models.domain.Character
 import com.rick.network.models.remote.RemoteCharacter
-import com.rick.network.repository.RickMortyApiClient
 import com.rick.network.util.Constants.BASE_URL
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
