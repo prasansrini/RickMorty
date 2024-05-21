@@ -1,5 +1,8 @@
 package com.rick.network
 
+import android.util.Log
+import com.rick.network.model.Character
+import com.rick.network.repository.RickMortyApiClient
 import com.rick.network.util.Constants.BASE_URL
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -11,10 +14,9 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
-class KtorClient {
+class RickMortyApiClientImpl : RickMortyApiClient {
 	private val client = HttpClient(OkHttp) {
 		defaultRequest { url(BASE_URL) }
 
@@ -29,9 +31,16 @@ class KtorClient {
 		}
 	}
 
-	suspend fun getCharacter(id: Int) {
-		return client
-			.get("chracter/$id")
+	override suspend fun getCharacter(id: Int): Character {
+		val character: Character = client
+			.get("character/$id")
 			.body()
+
+		Log.e(
+			"CHARACTER_DEBUG",
+			character.toString()
+		)
+
+		return character
 	}
 }

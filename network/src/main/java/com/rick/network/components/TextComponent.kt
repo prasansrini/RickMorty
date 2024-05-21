@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 @Composable
 fun TextComponent(name: String, modifier: Modifier) {
 	Text(
-		text = "Hello $name!",
+		text = "$name!",
 		modifier = modifier
 	)
 }

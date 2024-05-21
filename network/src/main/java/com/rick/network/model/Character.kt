@@ -4,10 +4,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Character(
-		private val id: Int,
-		private val name: String,
-		private val type: String,
-		private val gender: String,
-		private val origin: Origin,
-		private val image: String
-)
+		val id: Int, val name: String, val type: String, val gender: String, val origin: Origin, val image: String
+) {
+	override fun toString(): String {
+		return "Character(id=$id, name='$name', type='$type', gender='$gender', origin=$origin, image='$image')"
+	}
+}
