@@ -95,16 +95,14 @@ fun MainScreen(character: Character, episodes: List<Episode>) {
 	) {
 		item { CharacterNameComponent(name = character.name) }
 		item { Spacer(modifier = Modifier.height(16.dp)) }
-		item {
-			CharacterImage(
-				imageUrl = character.imageUrl
-			)
-		}
+		item { CharacterImage(imageUrl = character.imageUrl) }
 
 		episodes
 			.groupBy { it.seasonNumber }
 			.forEach { mapEntry ->
+
 				item { SeasonNumber(seasonNumber = mapEntry.key) }
+
 				items(mapEntry.value) { episode ->
 					EpisodeRowComponent(episode = episode)
 				}
