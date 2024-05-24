@@ -61,7 +61,9 @@ class RickMortyApiClientImpl : RickMortyApiClient {
 			client
 				.get("episode/$idsCommaSeparated")
 				.body<List<RemoteEpisode>>()
-				.map { it.toDomainEpisode() }
+				.map {
+					it.toDomainEpisode()
+				}
 		}
 	}
 

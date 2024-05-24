@@ -1,8 +1,7 @@
 package com.rick.network.models.domain
 
 data class Character(
-		val created: String,
-		val episodeUrls: List<String>,
+		val created: String, val episodeIds: List<Int>,
 		val gender: CharacterGender,
 		val id: Int,
 		val imageUrl: String,

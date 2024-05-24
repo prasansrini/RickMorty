@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RemoteEpisode(
-		val id: Int, val name: String, val episode: String, val air_date: String, val character: List<String>
+		val id: Int, val name: String, val episode: String, val air_date: String, val characters: List<String>
 )
 
 fun RemoteEpisode.toDomainEpisode(): Episode {
@@ -20,7 +20,7 @@ fun RemoteEpisode.toDomainEpisode(): Episode {
 			.takeLast(2)
 			.toInt(),
 		airDate = air_date,
-		characterIdsInEpisode = character.map {
+		characterIdsInEpisode = characters.map {
 			it
 				.substring(startIndex = it.lastIndexOf("/") + 1)
 				.toInt()

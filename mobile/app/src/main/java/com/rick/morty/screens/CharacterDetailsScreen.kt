@@ -84,7 +84,7 @@ fun CharacterDetailsScreen(
 					add(
 						DataPoint(
 							"Episode count",
-							character.episodeUrls.size.toString()
+							character.episodeIds.size.toString()
 						)
 					)
 				}
