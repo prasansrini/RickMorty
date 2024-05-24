@@ -26,7 +26,8 @@ import com.rick.network.models.domain.Episode
 @Composable
 fun EpisodeRowComponent(episode: Episode) {
 	Row(
-		verticalAlignment = Alignment.CenterVertically
+		verticalAlignment = Alignment.CenterVertically,
+		modifier = Modifier.padding(8.dp)
 	) {
 		DataPointComponent(
 			dataPoint = DataPoint(
