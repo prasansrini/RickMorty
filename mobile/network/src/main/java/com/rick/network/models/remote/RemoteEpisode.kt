@@ -6,7 +6,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class RemoteEpisode(
 		val id: Int, val name: String, val episode: String, val air_date: String, val characters: List<String>
-)
+) {
+	override fun toString(): String {
+		return "RemoteEpisode(id=$id, name='$name', episode='$episode', air_date='$air_date', characters=$characters)"
+	}
+}
 
 fun RemoteEpisode.toDomainEpisode(): Episode {
 	return Episode(id = id,

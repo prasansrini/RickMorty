@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-	private val characterId = 2
+	private val characterId = (0..600).random()
 
 	@Inject
 	lateinit var rickMortyApiClient: RickMortyApiClient

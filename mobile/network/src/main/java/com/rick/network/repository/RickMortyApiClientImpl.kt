@@ -1,5 +1,6 @@
 package com.rick.network.repository
 
+import android.util.Log
 import com.rick.network.models.domain.Character
 import com.rick.network.models.domain.Episode
 import com.rick.network.models.remote.RemoteCharacter
@@ -62,6 +63,10 @@ class RickMortyApiClientImpl : RickMortyApiClient {
 				.get("episode/$idsCommaSeparated")
 				.body<List<RemoteEpisode>>()
 				.map {
+					Log.e(
+						"EPISODE_DEBUG",
+						it.toString()
+					)
 					it.toDomainEpisode()
 				}
 		}
