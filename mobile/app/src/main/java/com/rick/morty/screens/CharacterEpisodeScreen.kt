@@ -1,6 +1,7 @@
 package com.rick.morty.screens
 
 import android.util.Log
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.PaddingValues
@@ -87,6 +88,7 @@ fun CharacterEpisodeScreen(characterId: Int, client: RickMortyApiClient) {
 	} ?: LoadingState()
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MainScreen(character: Character, episodes: List<Episode>) {
 	LazyColumn(
@@ -101,7 +103,9 @@ fun MainScreen(character: Character, episodes: List<Episode>) {
 			.groupBy { it.seasonNumber }
 			.forEach { mapEntry ->
 
-				item { SeasonNumber(seasonNumber = mapEntry.key) }
+				stickyHeader { SeasonNumber(seasonNumber = mapEntry.key) }
+
+				item { Spacer(modifier = Modifier.height(16.dp)) }
 
 				items(mapEntry.value) { episode ->
 					EpisodeRowComponent(episode = episode)
@@ -119,6 +123,7 @@ fun SeasonNumber(seasonNumber: Int) {
 				top = 8.dp,
 				bottom = 16.dp
 			)
+			.background(color = RickPrimary)
 	) {
 		Text(
 			text = "Season $seasonNumber",
