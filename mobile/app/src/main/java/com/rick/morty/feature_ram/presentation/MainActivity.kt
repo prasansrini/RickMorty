@@ -52,8 +52,8 @@ class MainActivity : ComponentActivity() {
 					RickAndMortyAppTheme {
 						Surface(modifier = Modifier.fillMaxSize()) {
 							CharacterEpisodeScreen(
-								characterId = backStackEntry.arguments?.getInt("characterId")
-										?: -1
+								characterId = backStackEntry.arguments?.getInt("characterId") ?: -1,
+								client = rickMortyApiClient
 							)
 						}
 					}

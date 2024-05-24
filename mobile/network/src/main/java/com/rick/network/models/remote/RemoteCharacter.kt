@@ -29,41 +29,41 @@ data class RemoteCharacter(
 	data class Origin(
 			val name: String, val url: String
 	)
+}
 
-	fun toDomainCharacter(): Character {
-		val gender = when (gender.lowercase()) {
-			"female" -> CharacterGender.Female
-			"male" -> CharacterGender.Male
-			"genderless" -> CharacterGender.Genderless
-			else -> CharacterGender.Unknown
-		}
-
-		val characterStatus = when (status.lowercase()) {
-			"alive" -> CharacterStatus.Alive
-			"dead" -> CharacterStatus.Dead
-			else -> CharacterStatus.Unknown
-		}
-
-		return Character(
-			created = created,
-			episodeUrls = episode.map {
-				it.substring(it.lastIndexOf("/") + 1)
-			},
-			gender = gender,
-			id = id,
-			imageUrl = image,
-			location = Character.Location(
-				name = location.name,
-				url = origin.url
-			),
-			name = name,
-			origin = Character.Origin(
-				name = origin.name,
-				url = origin.url
-			),
-			species = species,
-			status = characterStatus,
-			type = type
-		)
+fun RemoteCharacter.toDomainCharacter(): Character {
+	val gender = when (gender.lowercase()) {
+		"female" -> CharacterGender.Female
+		"male" -> CharacterGender.Male
+		"genderless" -> CharacterGender.Genderless
+		else -> CharacterGender.Unknown
 	}
+
+	val characterStatus = when (status.lowercase()) {
+		"alive" -> CharacterStatus.Alive
+		"dead" -> CharacterStatus.Dead
+		else -> CharacterStatus.Unknown
+	}
+
+	return Character(
+		created = created,
+		episodeUrls = episode.map {
+			it.substring(it.lastIndexOf("/") + 1)
+		},
+		gender = gender,
+		id = id,
+		imageUrl = image,
+		location = Character.Location(
+			name = location.name,
+			url = origin.url
+		),
+		name = name,
+		origin = Character.Origin(
+			name = origin.name,
+			url = origin.url
+		),
+		species = species,
+		status = characterStatus,
+		type = type
+	)
 }

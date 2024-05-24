@@ -1,7 +1,11 @@
 package com.rick.network.repository
 
 import com.rick.network.models.domain.Character
+import com.rick.network.models.domain.Episode
 import com.rick.network.models.remote.RemoteCharacter
+import com.rick.network.models.remote.RemoteEpisode
+import com.rick.network.models.remote.toDomainCharacter
+import com.rick.network.models.remote.toDomainEpisode
 import com.rick.network.util.Constants.BASE_URL
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -32,6 +36,8 @@ class RickMortyApiClientImpl : RickMortyApiClient {
 
 	private var characterCache = mutableMapOf<Int, Character>()
 
+	private var episodeCache = mutableMapOf<Int, Episode>()
+
 	override suspend fun getCharacter(id: Int): ApiOperation<Character> {
 		characterCache[id]?.let {
 			return ApiOperation.Success(it)
@@ -45,6 +51,17 @@ class RickMortyApiClientImpl : RickMortyApiClient {
 				.also {
 					characterCache[id] = it
 				}
+		}
+	}
+
+	override suspend fun getEpisodes(episodeIds: List<Int>): ApiOperation<List<Episode>> {
+		val idsCommaSeparated = episodeIds.joinToString(separator = ",")
+
+		return safeApiCall {
+			client
+				.get("episode/$idsCommaSeparated")
+				.body<List<RemoteEpisode>>()
+				.map { it.toDomainEpisode() }
 		}
 	}
 

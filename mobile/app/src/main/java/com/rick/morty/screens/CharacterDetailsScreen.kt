@@ -4,9 +4,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,8 +23,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.SubcomposeAsyncImage
 import com.rick.morty.feature_ram.components.character.CharacterDetailsNamePlateComponent
+import com.rick.morty.feature_ram.components.common.CharacterImage
 import com.rick.morty.feature_ram.components.common.DataPoint
 import com.rick.morty.feature_ram.components.common.DataPointComponent
 import com.rick.morty.feature_ram.components.common.LoadingState
@@ -131,16 +129,7 @@ fun CharacterDetailsScreen(
 		}
 
 		item {
-			SubcomposeAsyncImage(
-				model = character!!.imageUrl,
-				contentDescription = "Character image",
-				modifier = Modifier
-					.fillMaxWidth()
-					.aspectRatio(1f)
-					.padding(12.dp)
-					.clip(RoundedCornerShape(12.dp)),
-				loading = { LoadingState() }
-			)
+			CharacterImage(imageUrl = character!!.imageUrl)
 		}
 
 		items(characterDataPoints) { dataPoint ->
