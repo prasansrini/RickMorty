@@ -1,7 +1,7 @@
 package com.rick.morty.feature_ram.di
 
-import com.rick.network.repository.RickMortyApiClientImpl
 import com.rick.network.repository.RickMortyApiClient
+import com.rick.network.repository.RickMortyApiClientImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

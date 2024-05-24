@@ -138,8 +138,7 @@ fun MainScreen(character: Character, episodes: List<Episode>) {
 
 		item { Spacer(modifier = Modifier.height(16.dp)) }
 
-		episodeBySeasonMap
-			.forEach { mapEntry ->
+		episodeBySeasonMap.forEach { mapEntry ->
 
 				stickyHeader { SeasonNumber(seasonNumber = mapEntry.key) }
 
