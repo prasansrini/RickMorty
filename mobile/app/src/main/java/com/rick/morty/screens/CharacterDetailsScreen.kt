@@ -33,7 +33,6 @@ import com.rick.morty.feature_ram.components.common.LoadingState
 import com.rick.morty.feature_ram.ui.theme.RickAction
 import com.rick.network.models.domain.Character
 import com.rick.network.repository.RickMortyApiClient
-import kotlinx.coroutines.delay
 
 @Composable
 fun CharacterDetailsScreen(
@@ -97,8 +96,6 @@ fun CharacterDetailsScreen(
 
 	LaunchedEffect(key1 = Unit,
 		block = {
-			delay(500)
-
 			rickMortyApiClient
 				.getCharacter(characterId)
 				.onSuccess { result ->

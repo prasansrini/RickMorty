@@ -30,12 +30,21 @@ class RickMortyApiClientImpl : RickMortyApiClient {
 		}
 	}
 
+	private var characterCache = mutableMapOf<Int, Character>()
+
 	override suspend fun getCharacter(id: Int): ApiOperation<Character> {
+		characterCache[id]?.let {
+			return ApiOperation.Success(it)
+		}
+
 		return safeApiCall {
 			client
 				.get("character/$id")
 				.body<RemoteCharacter>()
 				.toDomainCharacter()
+				.also {
+					characterCache[id] = it
+				}
 		}
 	}
 
